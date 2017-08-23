@@ -545,7 +545,6 @@ def heat_box_entire_image(img, W_resize, output_path=None):
     """
     img_resized, heat = feed_entire_image(img, W_resize, 'heat')
     threshed = heat > 0.2
-    print(threshed.shape, img_resized.shape)
     contours, hierarchy = cv2.findContours(threshed.astype(np.uint8), 1, 2)
     boxes = []
     for cnt in contours:
@@ -567,8 +566,10 @@ def heat_box_entire_image(img, W_resize, output_path=None):
         plt.show()
     return boxes
 
+demo_root = '/mnt/hdd3t/data/huva_cars/20170206-lornie-road/demos/number_sequence_7374'
+
 def sequence_demo(W_resize=208*4, output=False):
-    output_root = '/mnt/hdd3t/data/huva_cars/20170206-lornie-road/demos/number_sequence'
+    output_root = demo_root
     raw_filenames = sorted(glob(output_root+'/raw/*.jpg'))
     name_to_boxes = {}
     for filename in raw_filenames:
